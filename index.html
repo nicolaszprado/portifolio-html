@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nicolas Prado | Desenvolvedor Backend</title>
+  <meta name="description"
+    content="Desenvolvedor Backend com 2 anos de experiência em Java, Python e Node.js. Especializado em APIs RESTful, automações e sistemas escaláveis." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0b0f14;
+      --muted: #4b5563;
+      --card: #f6f8fa;
+      --border: #e5e7eb;
+      --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid #111827;
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    .page {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px 56px;
+    }
+
+    .container {
+      width: min(920px, 100%);
+      display: grid;
+      gap: 36px;
+    }
+
+    .header {
+      display: grid;
+      gap: 24px;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .profile {
+      display: grid;
+      gap: 20px;
+      align-items: center;
+      justify-items: center;
+    }
+
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 8px;
+      background: transparent;
+      border: none;
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 0;
+    }
+
+    .name {
+      font-size: clamp(26px, 3vw, 34px);
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .role {
+      margin: 4px 0 0;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .summary {
+      max-width: 56ch;
+      margin: 12px auto 0;
+      color: var(--muted);
+    }
+
+    .links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      border-color: #cbd5e1;
+    }
+
+    .section {
+      display: grid;
+      gap: 16px;
+    }
+
+    .section h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #111827;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 13px;
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .badge svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: #cbd5e1;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .card a {
+      font-size: 13px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 8px;
+      background: var(--card);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: #374151;
+    }
+
+    @media (min-width: 820px) {
+      .header {
+        grid-template-columns: auto 1fr;
+        text-align: left;
+        justify-items: start;
+      }
+
+      .profile {
+        grid-template-columns: auto 1fr;
+        justify-items: start;
+      }
+
+      .summary {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+      <header class="header">
+        <div class="profile">
+          <!-- Profile Photo -->
+          <div class="avatar" aria-label="Foto de perfil">
+            <img src="profile.jpg" alt="Foto de perfil de Nicolas Prado"
+              style="width: 100%; height: 100%; object-fit: cover; object-position: center 35%; border-radius: 8px;" />
+          </div>
+
+          <div>
+            <h1 class="name">Nicolas Prado</h1>
+            <p class="role" style="font-size: 18px; font-weight: 600;">Desenvolvedor Backend | Java · Python</p>
+            <p class="summary">
+              Desenvolvedor backend com experiência em Java/Spring e Python/FastAPI, atuando na construção de APIs,
+              microsserviços,
+              automações e processamento de dados. Possui vivência com sistemas corporativos, arquivos regulatórios,
+              scraping,
+              integrações com IA e definição de arquitetura. Busco uma vaga de desenvolvedor backend.
+            </p>
+          </div>
+        </div>
+
+        <div class="links">
+          <!-- Edit me: Links -->
+          <a class="btn" href="https://github.com/nicolaszprado" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/nicolaszprado/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="mailto:nicolas.pradorlandini@gmail.com">Email</a>
+        </div>
+      </header>
+
+      <section class="section">
+        <h2>Objetivo Profissional</h2>
+        <p style="color: var(--muted); max-width: 72ch;">
+          Busco posição como Desenvolvedor Backend onde possa aplicar minha experiência em Java/Spring Boot
+          e Python/FastAPI na construção de sistemas robustos e escaláveis. Tenho interesse especial em arquitetura
+          de microsserviços, processamento de dados e integração de sistemas.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Experiência</h2>
+        <div style="color: var(--muted); max-width: 72ch;">
+
+          <div style="margin-bottom: 24px;">
+            <p style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Revex — Desenvolvedor Back-End</p>
+            <p style="margin: 0 0 12px 0; font-size: 14px;">~1 ano</p>
+            <ul style="margin: 0 0 8px 0; padding-left: 20px; font-size: 14px;">
+              <li>Desenvolvimento e manutenção de serviços backend em Java/Spring Boot</li>
+              <li>Participação em arquitetura baseada em microsserviços</li>
+              <li>Monitoramento e suporte a sistema WFM (Workforce Management)</li>
+              <li>Manipulação e processamento de arquivos regulatórios (AFD, AFDT, AEJ)</li>
+              <li>Garantia de qualidade, confiabilidade e integridade dos dados</li>
+            </ul>
+            <p style="margin: 0; font-size: 13px; color: var(--muted);">Java • Spring Boot • Microsserviços •
+              Processamento de arquivos • Git</p>
+          </div>
+
+          <div>
+            <p style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Maximiza — Desenvolvedor Back-End</p>
+            <p style="margin: 0 0 12px 0; font-size: 14px;">~6 meses</p>
+            <ul style="margin: 0 0 8px 0; padding-left: 20px; font-size: 14px;">
+              <li>Desenvolvimento de crawlers e rotinas de web scraping</li>
+              <li>Definição de arquitetura do projeto e organização do backend</li>
+              <li>Criação de APIs utilizando FastAPI (Python)</li>
+              <li>Integração com OpenAI API para processamento de dados</li>
+              <li>Estruturação de fluxos automatizados de coleta e tratamento de dados</li>
+            </ul>
+            <p style="margin: 0; font-size: 13px; color: var(--muted);">Python • FastAPI • Web Scraping • OpenAI API •
+              Arquitetura de Software • Git</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Tecnologias</h2>
+        <div class="badges">
+          <span class="badge" title="Java" style="background: #f0f4ff; border-color: #d1e0ff; font-weight: 600;">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 12c0-2 1-4 3-4s3 2 3 4-1 4-3 4-3-2-3-4z" />
+              <path d="M8 6c2-1 4-1 6 0" />
+              <path d="M6 18c3 2 9 2 12 0" />
+            </svg>
+            Java
+          </span>
+          <span class="badge" title="Python" style="background: #f0f4ff; border-color: #d1e0ff; font-weight: 600;">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M7 7h5a3 3 0 0 1 3 3v2" />
+              <path d="M17 17h-5a3 3 0 0 1-3-3v-2" />
+              <circle cx="9" cy="6" r="1" fill="currentColor" />
+              <circle cx="15" cy="18" r="1" fill="currentColor" />
+            </svg>
+            Python
+          </span>
+          <span class="badge" title="Node.js">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3l7 4v10l-7 4-7-4V7z" />
+              <path d="M9.5 10.5h5v3h-5z" />
+            </svg>
+            Node.js
+          </span>
+          <span class="badge" title="Spring Boot">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M8 12l3 3 5-6" />
+            </svg>
+            Spring Boot
+          </span>
+          <span class="badge" title="FastAPI">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 3l8 8-8 8V3z" />
+              <path d="M11 21L3 13l8-8v16z" />
+            </svg>
+            FastAPI
+          </span>
+          <span class="badge" title="PostgreSQL">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 8c0-3.3 2.7-5 6-5s6 1.7 6 5v8c0 3.3-2.7 5-6 5s-6-1.7-6-5z" />
+              <path d="M7 10c2 1.5 8 1.5 10 0" />
+            </svg>
+            PostgreSQL
+          </span>
+          <span class="badge" title="MongoDB">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v18" />
+              <path d="M6 6c0-2 2.7-3 6-3s6 1 6 3c0 4-2 8-6 12-4-4-6-8-6-12z" />
+            </svg>
+            MongoDB
+          </span>
+          <span class="badge" title="Docker">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 14h16" />
+              <path d="M6 10h3v3H6z" />
+              <path d="M10 10h3v3h-3z" />
+              <path d="M14 10h3v3h-3z" />
+              <path d="M8 6h3v3H8z" />
+              <path d="M16 16c.5 2-1 4-4 4H9c-3 0-5-2-5-5v-1" />
+            </svg>
+            Docker
+          </span>
+          <span class="badge" title="Git">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12l8-8 8 8-8 8z" />
+              <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+              <circle cx="9" cy="9" r="1.5" fill="currentColor" />
+              <circle cx="15" cy="15" r="1.5" fill="currentColor" />
+            </svg>
+            Git
+          </span>
+          <span class="badge" title="JWT">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <path d="M9 12h6" />
+              <path d="M12 9v6" />
+            </svg>
+            JWT
+          </span>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Projetos</h2>
+        <div class="projects" id="projects"></div>
+      </section>
+
+      <section class="section">
+        <h2>Contato</h2>
+        <p style="color: var(--muted); margin-bottom: 16px;">Estou aberto a oportunidades e networking. Vamos conversar?
+        </p>
+        <div class="links">
+          <a class="btn" href="mailto:nicolas.pradorlandini@gmail.com">📧 Email</a>
+          <a class="btn" href="https://www.linkedin.com/in/nicolaszprado/" target="_blank" rel="noopener">💼
+            LinkedIn</a>
+          <a class="btn" href="https://github.com/nicolaszprado" target="_blank" rel="noopener">🔗 GitHub</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Projetos Reais do GitHub
+    const projects = [
+      {
+        name: "Sistema de Autenticação JWT",
+        description: "API backend em Java com Spring Boot e Spring Security implementando autenticação completa com JWT, incluindo controle de acesso e segurança. Projeto fullstack com frontend React integrado.",
+        url: "https://github.com/nicolaszprado/auth-project-nicolasz",
+        tags: ["Java", "Spring Boot", "JWT", "Spring Security"]
+      },
+      {
+        name: "API Open Food Facts",
+        description: "Backend em Node.js/Express que consome a API Open Food Facts para buscar dados nutricionais de produtos por código de barras. Arquitetura REST com integração de APIs externas.",
+        url: "https://github.com/nicolaszprado/openfoodproject-backend",
+        tags: ["Node.js", "Express", "API Integration"]
+      },
+      {
+        name: "Automação de Testes Backend",
+        description: "Framework de automação de testes para APIs REST utilizando Ruby e HTTParty. Implementa validações completas de endpoints e respostas HTTP.",
+        url: "https://github.com/nicolaszprado/Automacao-backend-com-Ruby-HTTparty",
+        tags: ["Ruby", "HTTParty", "Testing", "Automation"]
+      }
+    ];
+
+    const projectsContainer = document.getElementById("projects");
+
+    projects.forEach((project) => {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const title = document.createElement("h3");
+      title.textContent = project.name;
+
+      const desc = document.createElement("p");
+      desc.textContent = project.description;
+
+      const link = document.createElement("a");
+      link.href = project.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = "Ver no GitHub";
+
+      const tags = document.createElement("div");
+      tags.className = "tags";
+
+      project.tags.forEach((tag) => {
+        const tagEl = document.createElement("span");
+        tagEl.className = "tag";
+        tagEl.textContent = tag;
+        tags.appendChild(tagEl);
+      });
+
+      card.appendChild(title);
+      card.appendChild(desc);
+      card.appendChild(link);
+      card.appendChild(tags);
+
+      projectsContainer.appendChild(card);
+    });
+  </script>
+</body>
+
+</html>
