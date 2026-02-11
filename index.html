@@ -18,6 +18,15 @@
       --radius: 14px;
     }
 
+    [data-theme="dark"] {
+      --bg: #0b0f14;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #1a1f28;
+      --border: #2d3748;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
     * {
       box-sizing: border-box;
     }
@@ -33,6 +42,7 @@
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      transition: background-color 300ms ease, color 300ms ease;
     }
 
     a {
@@ -42,9 +52,40 @@
 
     a:focus-visible,
     button:focus-visible {
-      outline: 2px solid #111827;
+      outline: 2px solid var(--text);
       outline-offset: 3px;
       border-radius: 8px;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--card);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 150ms ease, box-shadow 150ms ease, background 300ms ease;
+      font-size: 20px;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon-btn:active {
+      transform: translateY(0);
     }
 
     .page {
@@ -52,18 +93,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 32px 20px 56px;
+      padding: 20px 16px 40px;
     }
 
     .container {
       width: min(920px, 100%);
       display: grid;
-      gap: 36px;
+      gap: 28px;
     }
 
     .header {
       display: grid;
-      gap: 24px;
+      gap: 20px;
       align-items: center;
       justify-items: center;
       text-align: center;
@@ -74,11 +115,12 @@
       gap: 20px;
       align-items: center;
       justify-items: center;
+      grid-auto-flow: row;
     }
 
     .avatar {
-      width: 140px;
-      height: 140px;
+      width: 120px;
+      height: 120px;
       border-radius: 8px;
       background: transparent;
       border: none;
@@ -91,22 +133,26 @@
     }
 
     .name {
-      font-size: clamp(26px, 3vw, 34px);
+      font-size: clamp(24px, 5vw, 34px);
       font-weight: 700;
       margin: 0;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .role {
       margin: 4px 0 0;
-      font-size: 16px;
+      font-size: clamp(15px, 3.5vw, 16px);
       color: var(--muted);
+      line-height: 1.4;
     }
 
     .summary {
       max-width: 56ch;
       margin: 12px auto 0;
       color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
     }
 
     .links {
@@ -117,18 +163,21 @@
     }
 
     .btn {
-      padding: 10px 16px;
+      padding: 11px 18px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #fff;
-      transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+      background: var(--card);
+      transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, background 300ms ease;
       font-size: 14px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .btn:hover {
       transform: translateY(-1px);
       box-shadow: var(--shadow);
-      border-color: #cbd5e1;
     }
 
     .section {
@@ -141,7 +190,7 @@
       font-size: 18px;
       letter-spacing: 0.02em;
       text-transform: uppercase;
-      color: #111827;
+      color: var(--text);
     }
 
     .badges {
@@ -159,7 +208,12 @@
       border: 1px solid var(--border);
       border-radius: 999px;
       font-size: 13px;
-      transition: transform 140ms ease, box-shadow 140ms ease;
+      color: var(--text);
+      transition: transform 140ms ease, box-shadow 140ms ease, background 300ms ease;
+    }
+
+    .badge-highlight {
+      font-weight: 600;
     }
 
     .badge:hover {
@@ -175,24 +229,23 @@
 
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 1fr;
       gap: 16px;
     }
 
     .card {
-      background: #fff;
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 16px;
       display: grid;
       gap: 10px;
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 300ms ease;
     }
 
     .card:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow);
-      border-color: #cbd5e1;
     }
 
     .card h3 {
@@ -224,14 +277,78 @@
       background: var(--card);
       border-radius: 999px;
       border: 1px solid var(--border);
-      color: #374151;
+      color: var(--muted);
     }
 
+    /* Mobile optimizations */
+    @media (max-width: 480px) {
+      .page {
+        padding: 16px 12px 32px;
+      }
+
+      .container {
+        gap: 24px;
+      }
+
+      .header {
+        gap: 16px;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+      }
+
+      .name {
+        font-size: 22px;
+      }
+
+      .section h2 {
+        font-size: 16px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      .btn {
+        font-size: 13px;
+        padding: 10px 16px;
+      }
+
+      .badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+    }
+
+    /* Tablet optimizations */
+    @media (min-width: 481px) and (max-width: 819px) {
+      .projects {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .avatar {
+        width: 130px;
+        height: 130px;
+      }
+    }
+
+    /* Desktop layout */
     @media (min-width: 820px) {
+      .page {
+        padding: 32px 20px 56px;
+      }
+
+      .container {
+        gap: 36px;
+      }
+
       .header {
         grid-template-columns: auto 1fr;
         text-align: left;
         justify-items: start;
+        gap: 24px;
       }
 
       .profile {
@@ -239,15 +356,35 @@
         justify-items: start;
       }
 
+      .avatar {
+        width: 140px;
+        height: 140px;
+      }
+
       .summary {
         margin-left: 0;
         margin-right: 0;
+        font-size: 16px;
+      }
+
+      .projects {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Control Buttons -->
+  <div class="controls">
+    <button class="icon-btn" id="themeToggle" aria-label="Alternar tema" title="Alternar tema">
+      🌙
+    </button>
+    <button class="icon-btn" id="langToggle" aria-label="Toggle language" title="PT-BR / EN">
+      🌐
+    </button>
+  </div>
+
   <main class="page">
     <div class="container">
       <header class="header">
@@ -260,8 +397,9 @@
 
           <div>
             <h1 class="name">Nicolas Prado</h1>
-            <p class="role" style="font-size: 18px; font-weight: 600;">Desenvolvedor Backend | Java · Python</p>
-            <p class="summary">
+            <p class="role" data-i18n="role" style="font-size: 18px; font-weight: 600;">Desenvolvedor Backend | Java ·
+              Python</p>
+            <p class="summary" data-i18n="summary">
               Desenvolvedor backend com experiência em Java/Spring e Python/FastAPI, atuando na construção de APIs,
               microsserviços,
               automações e processamento de dados. Possui vivência com sistemas corporativos, arquivos regulatórios,
@@ -280,8 +418,8 @@
       </header>
 
       <section class="section">
-        <h2>Objetivo Profissional</h2>
-        <p style="color: var(--muted); max-width: 72ch;">
+        <h2 data-i18n="professionalObjective">Objetivo Profissional</h2>
+        <p data-i18n="objectiveText" style="color: var(--muted); max-width: 72ch;">
           Busco posição como Desenvolvedor Backend onde possa aplicar minha experiência em Java/Spring Boot
           e Python/FastAPI na construção de sistemas robustos e escaláveis. Tenho interesse especial em arquitetura
           de microsserviços, processamento de dados e integração de sistemas.
@@ -289,44 +427,46 @@
       </section>
 
       <section class="section">
-        <h2>Experiência</h2>
+        <h2 data-i18n="experience">Experiência</h2>
         <div style="color: var(--muted); max-width: 72ch;">
 
           <div style="margin-bottom: 24px;">
-            <p style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Revex — Desenvolvedor Back-End</p>
-            <p style="margin: 0 0 12px 0; font-size: 14px;">~1 ano</p>
+            <p data-i18n="revexTitle" style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Revex —
+              Desenvolvedor Back-End</p>
+            <p data-i18n="revexDuration" style="margin: 0 0 12px 0; font-size: 14px;">~1 ano</p>
             <ul style="margin: 0 0 8px 0; padding-left: 20px; font-size: 14px;">
-              <li>Desenvolvimento e manutenção de serviços backend em Java/Spring Boot</li>
-              <li>Participação em arquitetura baseada em microsserviços</li>
-              <li>Monitoramento e suporte a sistema WFM (Workforce Management)</li>
-              <li>Manipulação e processamento de arquivos regulatórios (AFD, AFDT, AEJ)</li>
-              <li>Garantia de qualidade, confiabilidade e integridade dos dados</li>
+              <li data-i18n="revexItem1">Desenvolvimento e manutenção de serviços backend em Java/Spring Boot</li>
+              <li data-i18n="revexItem2">Participação em arquitetura baseada em microsserviços</li>
+              <li data-i18n="revexItem3">Monitoramento e suporte a sistema WFM (Workforce Management)</li>
+              <li data-i18n="revexItem4">Manipulação e processamento de arquivos regulatórios (AFD, AFDT, AEJ)</li>
+              <li data-i18n="revexItem5">Garantia de qualidade, confiabilidade e integridade dos dados</li>
             </ul>
-            <p style="margin: 0; font-size: 13px; color: var(--muted);">Java • Spring Boot • Microsserviços •
-              Processamento de arquivos • Git</p>
+            <p data-i18n="revexTech" style="margin: 0; font-size: 13px; color: var(--muted);">Java • Spring Boot •
+              Microsserviços • Processamento de arquivos • Git</p>
           </div>
 
           <div>
-            <p style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Maximiza — Desenvolvedor Back-End</p>
-            <p style="margin: 0 0 12px 0; font-size: 14px;">~6 meses</p>
+            <p data-i18n="maximaTitle" style="font-weight: 600; color: var(--text); margin: 0 0 4px 0;">Maximiza —
+              Desenvolvedor Back-End</p>
+            <p data-i18n="maximaDuration" style="margin: 0 0 12px 0; font-size: 14px;">~6 meses</p>
             <ul style="margin: 0 0 8px 0; padding-left: 20px; font-size: 14px;">
-              <li>Desenvolvimento de crawlers e rotinas de web scraping</li>
-              <li>Definição de arquitetura do projeto e organização do backend</li>
-              <li>Criação de APIs utilizando FastAPI (Python)</li>
-              <li>Integração com OpenAI API para processamento de dados</li>
-              <li>Estruturação de fluxos automatizados de coleta e tratamento de dados</li>
+              <li data-i18n="maximaItem1">Desenvolvimento de crawlers e rotinas de web scraping</li>
+              <li data-i18n="maximaItem2">Definição de arquitetura do projeto e organização do backend</li>
+              <li data-i18n="maximaItem3">Criação de APIs utilizando FastAPI (Python)</li>
+              <li data-i18n="maximaItem4">Integração com OpenAI API para processamento de dados</li>
+              <li data-i18n="maximaItem5">Estruturação de fluxos automatizados de coleta e tratamento de dados</li>
             </ul>
-            <p style="margin: 0; font-size: 13px; color: var(--muted);">Python • FastAPI • Web Scraping • OpenAI API •
-              Arquitetura de Software • Git</p>
+            <p data-i18n="maximaTech" style="margin: 0; font-size: 13px; color: var(--muted);">Python • FastAPI • Web
+              Scraping • OpenAI API • Arquitetura de Software • Git</p>
           </div>
 
         </div>
       </section>
 
       <section class="section">
-        <h2>Tecnologias</h2>
+        <h2 data-i18n="technologies">Tecnologias</h2>
         <div class="badges">
-          <span class="badge" title="Java" style="background: #f0f4ff; border-color: #d1e0ff; font-weight: 600;">
+          <span class="badge badge-highlight" title="Java">
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M8 12c0-2 1-4 3-4s3 2 3 4-1 4-3 4-3-2-3-4z" />
               <path d="M8 6c2-1 4-1 6 0" />
@@ -334,7 +474,7 @@
             </svg>
             Java
           </span>
-          <span class="badge" title="Python" style="background: #f0f4ff; border-color: #d1e0ff; font-weight: 600;">
+          <span class="badge badge-highlight" title="Python">
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M7 7h5a3 3 0 0 1 3 3v2" />
               <path d="M17 17h-5a3 3 0 0 1-3-3v-2" />
@@ -410,81 +550,251 @@
       </section>
 
       <section class="section">
-        <h2>Projetos</h2>
+        <h2 data-i18n="projects">Projetos</h2>
         <div class="projects" id="projects"></div>
       </section>
 
       <section class="section">
-        <h2>Contato</h2>
-        <p style="color: var(--muted); margin-bottom: 16px;">Estou aberto a oportunidades e networking. Vamos conversar?
+        <h2 data-i18n="contact">Contato</h2>
+        <p data-i18n="contactText" style="color: var(--muted); margin-bottom: 16px;">Estou aberto a oportunidades e
+          networking. Vamos conversar?
         </p>
         <div class="links">
-          <a class="btn" href="mailto:nicolas.pradorlandini@gmail.com">📧 Email</a>
-          <a class="btn" href="https://www.linkedin.com/in/nicolaszprado/" target="_blank" rel="noopener">💼
-            LinkedIn</a>
-          <a class="btn" href="https://github.com/nicolaszprado" target="_blank" rel="noopener">🔗 GitHub</a>
+          <a class="btn" data-i18n="contactEmail" href="mailto:nicolas.pradorlandini@gmail.com">📧 Email</a>
+          <a class="btn" data-i18n="contactLinkedin" href="https://www.linkedin.com/in/nicolaszprado/" target="_blank"
+            rel="noopener">💼 LinkedIn</a>
+          <a class="btn" data-i18n="contactGithub" href="https://github.com/nicolaszprado" target="_blank"
+            rel="noopener">🔗 GitHub</a>
         </div>
       </section>
     </div>
   </main>
 
   <script>
-    // Projetos Reais do GitHub
-    const projects = [
-      {
-        name: "Sistema de Autenticação JWT",
-        description: "API backend em Java com Spring Boot e Spring Security implementando autenticação completa com JWT, incluindo controle de acesso e segurança. Projeto fullstack com frontend React integrado.",
-        url: "https://github.com/nicolaszprado/auth-project-nicolasz",
-        tags: ["Java", "Spring Boot", "JWT", "Spring Security"]
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+    // Apply saved theme
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    function updateThemeIcon(theme) {
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // ===== LANGUAGE TOGGLE =====
+    const langToggle = document.getElementById('langToggle');
+    let currentLang = localStorage.getItem('language') || 'pt';
+
+    const translations = {
+      pt: {
+        title: "Nicolas Prado | Desenvolvedor Backend",
+        role: "Desenvolvedor Backend | Java · Python",
+        summary: "Desenvolvedor backend com experiência em Java/Spring e Python/FastAPI, atuando na construção de APIs, microsserviços, automações e processamento de dados. Possui vivência com sistemas corporativos, arquivos regulatórios, scraping, integrações com IA e definição de arquitetura. Busco uma vaga de desenvolvedor backend.",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        email: "Email",
+        professionalObjective: "Objetivo Profissional",
+        objectiveText: "Busco posição como Desenvolvedor Backend onde possa aplicar minha experiência em Java/Spring Boot e Python/FastAPI na construção de sistemas robustos e escaláveis. Tenho interesse especial em arquitetura de microsserviços, processamento de dados e integração de sistemas.",
+        experience: "Experiência",
+        revexTitle: "Revex — Desenvolvedor Back-End",
+        revexDuration: "~1 ano",
+        revexItem1: "Desenvolvimento e manutenção de serviços backend em Java/Spring Boot",
+        revexItem2: "Participação em arquitetura baseada em microsserviços",
+        revexItem3: "Monitoramento e suporte a sistema WFM (Workforce Management)",
+        revexItem4: "Manipulação e processamento de arquivos regulatórios (AFD, AFDT, AEJ)",
+        revexItem5: "Garantia de qualidade, confiabilidade e integridade dos dados",
+        revexTech: "Java • Spring Boot • Microsserviços • Processamento de arquivos • Git",
+        maximaTitle: "Maximiza — Desenvolvedor Back-End",
+        maximaDuration: "~6 meses",
+        maximaItem1: "Desenvolvimento de crawlers e rotinas de web scraping",
+        maximaItem2: "Definição de arquitetura do projeto e organização do backend",
+        maximaItem3: "Criação de APIs utilizando FastAPI (Python)",
+        maximaItem4: "Integração com OpenAI API para processamento de dados",
+        maximaItem5: "Estruturação de fluxos automatizados de coleta e tratamento de dados",
+        maximaTech: "Python • FastAPI • Web Scraping • OpenAI API • Arquitetura de Software • Git",
+        technologies: "Tecnologias",
+        projects: "Projetos",
+        contact: "Contato",
+        contactText: "Estou aberto a oportunidades e networking. Vamos conversar?",
+        contactEmail: "📧 Email",
+        contactLinkedin: "💼 LinkedIn",
+        contactGithub: "🔗 GitHub",
+        viewGithub: "Ver no GitHub",
+        project1Name: "Sistema de Autenticação JWT",
+        project1Desc: "API backend em Java com Spring Boot e Spring Security implementando autenticação completa com JWT, incluindo controle de acesso e segurança. Projeto fullstack com frontend React integrado.",
+        project2Name: "API Open Food Facts",
+        project2Desc: "Backend em Node.js/Express que consome a API Open Food Facts para buscar dados nutricionais de produtos por código de barras. Arquitetura REST com integração de APIs externas.",
+        project3Name: "Automação de Testes Backend",
+        project3Desc: "Framework de automação de testes para APIs REST utilizando Ruby e HTTParty. Implementa validações completas de endpoints e respostas HTTP."
       },
-      {
-        name: "API Open Food Facts",
-        description: "Backend em Node.js/Express que consome a API Open Food Facts para buscar dados nutricionais de produtos por código de barras. Arquitetura REST com integração de APIs externas.",
-        url: "https://github.com/nicolaszprado/openfoodproject-backend",
-        tags: ["Node.js", "Express", "API Integration"]
-      },
-      {
-        name: "Automação de Testes Backend",
-        description: "Framework de automação de testes para APIs REST utilizando Ruby e HTTParty. Implementa validações completas de endpoints e respostas HTTP.",
-        url: "https://github.com/nicolaszprado/Automacao-backend-com-Ruby-HTTparty",
-        tags: ["Ruby", "HTTParty", "Testing", "Automation"]
+      en: {
+        title: "Nicolas Prado | Backend Developer",
+        role: "Backend Developer | Java · Python",
+        summary: "Backend developer with experience in Java/Spring and Python/FastAPI, working on building APIs, microservices, automation and data processing. Has experience with corporate systems, regulatory files, scraping, AI integrations and architecture definition. Looking for a backend developer position.",
+        github: "GitHub",
+        linkedin: "LinkedIn",
+        email: "Email",
+        professionalObjective: "Professional Objective",
+        objectiveText: "Seeking a Backend Developer position where I can apply my experience in Java/Spring Boot and Python/FastAPI in building robust and scalable systems. I have special interest in microservices architecture, data processing and systems integration.",
+        experience: "Experience",
+        revexTitle: "Revex — Backend Developer",
+        revexDuration: "~1 year",
+        revexItem1: "Development and maintenance of backend services in Java/Spring Boot",
+        revexItem2: "Participation in microservices-based architecture",
+        revexItem3: "Monitoring and support of WFM (Workforce Management) system",
+        revexItem4: "Handling and processing of regulatory files (AFD, AFDT, AEJ)",
+        revexItem5: "Ensuring quality, reliability and data integrity",
+        revexTech: "Java • Spring Boot • Microservices • File Processing • Git",
+        maximaTitle: "Maximiza — Backend Developer",
+        maximaDuration: "~6 months",
+        maximaItem1: "Development of crawlers and web scraping routines",
+        maximaItem2: "Project architecture definition and backend organization",
+        maximaItem3: "API creation using FastAPI (Python)",
+        maximaItem4: "Integration with OpenAI API for data processing",
+        maximaItem5: "Structuring automated data collection and treatment flows",
+        maximaTech: "Python • FastAPI • Web Scraping • OpenAI API • Software Architecture • Git",
+        technologies: "Technologies",
+        projects: "Projects",
+        contact: "Contact",
+        contactText: "I'm open to opportunities and networking. Let's talk?",
+        contactEmail: "📧 Email",
+        contactLinkedin: "💼 LinkedIn",
+        contactGithub: "🔗 GitHub",
+        viewGithub: "View on GitHub",
+        project1Name: "JWT Authentication System",
+        project1Desc: "Backend API in Java with Spring Boot and Spring Security implementing complete JWT authentication, including access control and security. Fullstack project with integrated React frontend.",
+        project2Name: "Open Food Facts API",
+        project2Desc: "Backend in Node.js/Express that consumes the Open Food Facts API to fetch nutritional data of products by barcode. REST architecture with external APIs integration.",
+        project3Name: "Backend Test Automation",
+        project3Desc: "Test automation framework for REST APIs using Ruby and HTTParty. Implements complete endpoint and HTTP response validations."
       }
-    ];
+    };
 
-    const projectsContainer = document.getElementById("projects");
+    // ===== PROJECTS =====
+    const projectsData = {
+      pt: [
+        {
+          name: "Sistema de Autenticação JWT",
+          description: "API backend em Java com Spring Boot e Spring Security implementando autenticação completa com JWT, incluindo controle de acesso e segurança. Projeto fullstack com frontend React integrado.",
+          url: "https://github.com/nicolaszprado/auth-project-nicolasz",
+          tags: ["Java", "Spring Boot", "JWT", "Spring Security"]
+        },
+        {
+          name: "API Open Food Facts",
+          description: "Backend em Node.js/Express que consome a API Open Food Facts para buscar dados nutricionais de produtos por código de barras. Arquitetura REST com integração de APIs externas.",
+          url: "https://github.com/nicolaszprado/openfoodproject-backend",
+          tags: ["Node.js", "Express", "API Integration"]
+        },
+        {
+          name: "Automação de Testes Backend",
+          description: "Framework de automação de testes para APIs REST utilizando Ruby e HTTParty. Implementa validações completas de endpoints e respostas HTTP.",
+          url: "https://github.com/nicolaszprado/Automacao-backend-com-Ruby-HTTparty",
+          tags: ["Ruby", "HTTParty", "Testing", "Automation"]
+        }
+      ],
+      en: [
+        {
+          name: "JWT Authentication System",
+          description: "Backend API in Java with Spring Boot and Spring Security implementing complete JWT authentication, including access control and security. Fullstack project with integrated React frontend.",
+          url: "https://github.com/nicolaszprado/auth-project-nicolasz",
+          tags: ["Java", "Spring Boot", "JWT", "Spring Security"]
+        },
+        {
+          name: "Open Food Facts API",
+          description: "Backend in Node.js/Express that consumes the Open Food Facts API to fetch nutritional data of products by barcode. REST architecture with external APIs integration.",
+          url: "https://github.com/nicolaszprado/openfoodproject-backend",
+          tags: ["Node.js", "Express", "API Integration"]
+        },
+        {
+          name: "Backend Test Automation",
+          description: "Test automation framework for REST APIs using Ruby and HTTParty. Implements complete endpoint and HTTP response validations.",
+          url: "https://github.com/nicolaszprado/Automacao-backend-com-Ruby-HTTparty",
+          tags: ["Ruby", "HTTParty", "Testing", "Automation"]
+        }
+      ]
+    };
 
-    projects.forEach((project) => {
-      const card = document.createElement("article");
-      card.className = "card";
+    function renderProjects(lang) {
+      const projectsContainer = document.getElementById("projects");
+      projectsContainer.innerHTML = '';
+      const t = translations[lang];
 
-      const title = document.createElement("h3");
-      title.textContent = project.name;
+      projectsData[lang].forEach((project) => {
+        const card = document.createElement("article");
+        card.className = "card";
 
-      const desc = document.createElement("p");
-      desc.textContent = project.description;
+        const title = document.createElement("h3");
+        title.textContent = project.name;
 
-      const link = document.createElement("a");
-      link.href = project.url;
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.textContent = "Ver no GitHub";
+        const desc = document.createElement("p");
+        desc.textContent = project.description;
 
-      const tags = document.createElement("div");
-      tags.className = "tags";
+        const link = document.createElement("a");
+        link.href = project.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = t.viewGithub;
 
-      project.tags.forEach((tag) => {
-        const tagEl = document.createElement("span");
-        tagEl.className = "tag";
-        tagEl.textContent = tag;
-        tags.appendChild(tagEl);
+        const tags = document.createElement("div");
+        tags.className = "tags";
+
+        project.tags.forEach((tag) => {
+          const tagEl = document.createElement("span");
+          tagEl.className = "tag";
+          tagEl.textContent = tag;
+          tags.appendChild(tagEl);
+        });
+
+        card.appendChild(title);
+        card.appendChild(desc);
+        card.appendChild(link);
+        card.appendChild(tags);
+
+        projectsContainer.appendChild(card);
+      });
+    }
+
+    function applyLanguage(lang) {
+      const t = translations[lang];
+
+      // Update HTML lang attribute
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+      // Update page title
+      document.title = t.title;
+
+      // Update ALL elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+          el.textContent = t[key];
+        }
       });
 
-      card.appendChild(title);
-      card.appendChild(desc);
-      card.appendChild(link);
-      card.appendChild(tags);
+      // Render projects with translations
+      renderProjects(lang);
+    }
 
-      projectsContainer.appendChild(card);
+    // Initialize language
+    applyLanguage(currentLang);
+
+    // Language toggle click handler
+    langToggle.addEventListener('click', () => {
+      currentLang = currentLang === 'pt' ? 'en' : 'pt';
+      localStorage.setItem('language', currentLang);
+      applyLanguage(currentLang);
     });
   </script>
 </body>
